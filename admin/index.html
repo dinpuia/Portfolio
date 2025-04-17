@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<!DOCTYPE html><html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,49 +9,25 @@
   <link rel="stylesheet" href="../assets/fonts/remixicon/remixicon.css">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body class="d-flex align-items-center justify-content-center vh-100 bg-dark text-white">
-
-  <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%;">
+<body class="d-flex align-items-center justify-content-center vh-100 bg-dark text-white">  <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%;">
     <div class="text-center mb-4">
       <img src="logo.svg" alt="Logo" width="50" class="mb-2">
-      <h4 class="fw-bold">Endless Admin </h4>
-    </div>
-
-    <form id="loginForm">
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" id="email" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" id="password" class="form-control" required>
-      </div>
-      <button type="submit" class="btn btn-primary w-100">Log In</button>
-    </form>
-
-    <div id="errorMessage" class="text-danger text-center mt-3 d-none">Invalid credentials</div>
+      <h4 class="fw-bold">Endless Admin Login</h4>
+    </div><form id="loginForm">
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" id="email" class="form-control" required>
   </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" id="password" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-primary w-100">Log In</button>
+</form>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>
+<div id="errorMessage" class="text-danger text-center mt-3 d-none">Invalid credentials</div>
 
-  
-  <script>
-    const firebaseConfig = {
-  apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
-  authDomain: "endless-grafix-admin-5fff7.firebaseapp.com",
-  projectId: "endless-grafix-admin-5fff7",
-  storageBucket: "endless-grafix-admin-5fff7.firebasestorage.app",
-  messagingSenderId: "685694239178",
-  appId: "1:685694239178:web:e3bbe47e8c32a0df4f8f33",
-  measurementId: "G-T41P34TGKQ"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-    
+  </div>  <!-- Firebase Scripts -->  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>  <script src="firebase.js"></script>  <script>
     const auth = firebase.auth();
 
     document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -61,14 +36,13 @@ const analytics = getAnalytics(app);
       const password = document.getElementById('password').value;
 
       auth.signInWithEmailAndPassword(email, password)
-  .then(() => {
-    window.location.href = "dashboard.html"; // ✅ Corrected!
-  })
-  .catch((error) => {
-    console.error(error);
-    document.getElementById('errorMessage').classList.remove('d-none');
-  });
+        .then(() => {
+          window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+          console.error("Login error:", error);
+          document.getElementById('errorMessage').classList.remove('d-none');
+        });
     });
-  </script>
-</body>
+  </script></body>
 </html>
