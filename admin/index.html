@@ -46,13 +46,13 @@
       const password = document.getElementById('password').value;
 
       auth.signInWithEmailAndPassword(email, password)
-        .then(() => {
-         window.location.replace("dashboard.html");
-        })
-        .catch((error) => {
-          console.error(error);
-          document.getElementById('errorMessage').classList.remove('d-none');
-        });
+  .then(() => {
+    window.location.href = "dashboard.html"; // ✅ Corrected!
+  })
+  .catch((error) => {
+    console.error(error);
+    document.getElementById('errorMessage').classList.remove('d-none');
+  });
     });
   </script>
 </body>
