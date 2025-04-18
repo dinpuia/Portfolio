@@ -25,10 +25,20 @@
     }
     .card-description {
       display: -webkit-box;
-      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
+      -webkit-line-clamp: 4;
+    }
+    @media (max-width: 768px) {
+      .card-description {
+        -webkit-line-clamp: 2;
+      }
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease-in-out;
     }
   </style>
 </head>
@@ -59,9 +69,7 @@
         <a href="service-upload.html" class="btn btn-primary"><i class="ri-add-line me-1"></i> Add New Service</a>
       </div>
       <button id="themeToggle" class="btn btn-outline-light ms-2"><i class="ri-moon-line"></i></button>
-    </div><div class="row g-4" id="serviceList">
-  <!-- Service cards will load here -->
-</div>
+    </div><div class="row g-4" id="serviceList"></div>
 
 <div class="text-center mt-4 d-block d-md-none">
   <a href="service-upload.html" class="btn btn-primary"><i class="ri-add-line me-1"></i> Add New Service</a>
@@ -110,7 +118,8 @@
       const data = doc.data();
       const html = `
         <div class="col-md-6 col-lg-4">
-          <div class="card h-100">
+          <div class="card h-100 shadow-sm">
+            <img src="${data.image || 'https://via.placeholder.com/600x300?text=No+Image'}" class="card-img-top object-fit-cover" style="height: 180px; object-fit: cover;" alt="${data.title}">
             <div class="card-body">
               <h5 class="card-title">${data.title}</h5>
               <p class="card-text card-description">${data.description}</p>
