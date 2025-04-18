@@ -103,5 +103,57 @@
     <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
   </div>
 
-  <!-- Dashboard content continues... -->
+  <!-- Additional dashboard content goes here -->
 
+</div>
+
+  </div>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const firebaseConfig = {
+        apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
+        authDomain: "endless-grafix-admin-5fff7.firebaseapp.com",
+        projectId: "endless-grafix-admin-5fff7",
+        storageBucket: "endless-grafix-admin-5fff7.appspot.com",
+        messagingSenderId: "685694239178",
+        appId: "1:685694239178:web:e3bbe47e8c32a0df4f8f33",
+        measurementId: "G-T41P34TGKQ"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+
+      auth.onAuthStateChanged((user) => {
+        if (!user) {
+          window.location.href = "index.html";
+        }
+      });
+
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        auth.signOut().then(() => {
+          window.location.href = "index.html";
+        });
+      });
+
+      const menuBtn = document.getElementById("menuBtn");
+      const closeBtn = document.getElementById("closeSidebar");
+      const sidebar = document.getElementById("sidebar");
+
+      menuBtn.addEventListener("click", () => {
+        sidebar.classList.add("show");
+        menuBtn.style.display = "none";
+      });
+
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.remove("show");
+        menuBtn.style.display = "inline-block";
+      });
+    });
+  </script>  <script src="../assets/js/vendors/bootstrap.bundle.min.js"></script>  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    toggleBtn.addEventListener('click', () => {
+      const html = document.documentElement;
+      const theme = html.getAttribute('data-bs-theme');
+      html.setAttribute('data-bs-theme', theme === 'dark' ? 'light' : 'dark');
+    });
+  </script></body>
+</html>
