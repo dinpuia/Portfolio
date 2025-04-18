@@ -15,11 +15,16 @@
       transform: translateX(-100%);
     }
     .sidebar-toggle {
-      display: inline-block;
       background: none;
-      border: none;
+      border: 1px solid white;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 1.25rem;
       color: white;
-      font-size: 1.5rem;
+    }
+    [data-bs-theme="light"] .sidebar-toggle {
+      color: black;
+      border-color: black;
     }
     .sidebar-close {
       display: none;
@@ -60,7 +65,6 @@
 </head>
 <body>
   <div class="d-flex">
-    <!-- Sidebar -->
     <nav id="sidebar" class="bg-dark text-white vh-100 p-3">
       <div class="sidebar-close text-end"><span id="closeSidebar">&times;</span></div>
       <div class="d-flex align-items-center mb-4">
@@ -90,8 +94,7 @@
           <a href="#" id="logoutBtn" class="nav-link text-danger"><i class="ri-logout-box-line me-2"></i>Log Out</a>
         </li>
       </ul>
-    </nav><!-- Main Content -->
-<div class="flex-grow-1 p-4" style="background-color: var(--bs-body-bg);">
+    </nav><div class="flex-grow-1 p-4" style="background-color: var(--bs-body-bg);">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
       <button id="menuBtn" class="sidebar-toggle"><i class="ri-menu-line"></i></button>
@@ -100,35 +103,69 @@
     <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 col-lg-4 mb-4">
-      <div class="card border-0 shadow-sm bg-primary text-white">
+  <!-- Dashboard Stats -->
+  <div class="row text-white">
+    <div class="col-md-3 mb-4">
+      <div class="card bg-info text-center">
         <div class="card-body">
-          <h5 class="card-title"><i class="ri-mail-line me-2"></i>Messages</h5>
-          <p class="card-text">View and manage messages</p>
+          <h6>Visitors</h6>
+          <h4 id="visitorsCount">324</h4>
         </div>
       </div>
     </div>
-    <div class="col-md-6 col-lg-4 mb-4">
-      <div class="card border-0 shadow-sm bg-success text-white">
+    <div class="col-md-3 mb-4">
+      <div class="card bg-success text-center">
         <div class="card-body">
-          <h5 class="card-title"><i class="ri-briefcase-line me-2"></i>Portfolio</h5>
-          <p class="card-text">Manage your portfolio entries</p>
+          <h6>Blogs</h6>
+          <h4 id="blogCount">12</h4>
         </div>
       </div>
     </div>
-    <div class="col-md-6 col-lg-4 mb-4">
-      <div class="card border-0 shadow-sm bg-warning text-white">
+    <div class="col-md-3 mb-4">
+      <div class="card bg-warning text-center">
         <div class="card-body">
-          <h5 class="card-title"><i class="ri-article-line me-2"></i>Blog</h5>
-          <p class="card-text">Create and manage blog posts</p>
+          <h6>Messages</h6>
+          <h4 id="messageCount">48</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card bg-danger text-center">
+        <div class="card-body">
+          <h6>Portfolio</h6>
+          <h4 id="portfolioCount">20</h4>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Chart.js -->
+  <div class="card mt-4">
+    <div class="card-body">
+      <canvas id="adminChart" height="100"></canvas>
+    </div>
+  </div>
 </div>
 
-  </div>  <!-- Firebase SDKs -->  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>  <script>
+  </div>  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <script>
+    const ctx = document.getElementById('adminChart').getContext('2d');
+    const adminChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Visitors', 'Blogs', 'Messages', 'Portfolio'],
+        datasets: [{
+          label: 'Total',
+          data: [324, 12, 48, 20],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>  <!-- Firebase SDKs -->  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>  <script>
     document.addEventListener("DOMContentLoaded", function () {
       const firebaseConfig = {
         apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
@@ -155,7 +192,6 @@
         });
       });
 
-      // Toggle sidebar
       const menuBtn = document.getElementById("menuBtn");
       const closeBtn = document.getElementById("closeSidebar");
       const sidebar = document.getElementById("sidebar");
@@ -170,7 +206,7 @@
         menuBtn.style.display = "inline-block";
       });
     });
-  </script>  <!-- Bootstrap JS -->  <script src="../assets/js/vendors/bootstrap.bundle.min.js"></script>  <script>
+  </script>  <script src="../assets/js/vendors/bootstrap.bundle.min.js"></script>  <script>
     const toggleBtn = document.getElementById('themeToggle');
     toggleBtn.addEventListener('click', () => {
       const html = document.documentElement;
