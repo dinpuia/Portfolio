@@ -36,11 +36,27 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.2);
       transition: all 0.2s ease-in-out;
     }
+    #sidebar { transition: all 0.3s ease; }
+    #sidebar.hide { transform: translateX(-100%); }
+    .sidebar-toggle { border: 1px solid white; padding: 6px 10px; border-radius: 4px; font-size: 1.25rem; color: white; background: none; }
+    [data-bs-theme="light"] .sidebar-toggle { color: black; border-color: black; }
+    .sidebar-close { display: none; }
+    @media (max-width: 768px) {
+      #sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 1050; background-color: #212529; transform: translateX(-100%); }
+      #sidebar.show { transform: translateX(0); }
+      .sidebar-close { display: block; text-align: right; margin-bottom: 1rem; font-size: 1.25rem; cursor: pointer; }
+      #menuBtn { display: block; }
+    }
+    @media (min-width: 769px) {
+      #sidebar { transform: translateX(0) !important; }
+      #menuBtn { display: none !important; }
+    }
   </style>
 </head>
 <body>
 <div class="d-flex">
   <nav id="sidebar" class="bg-dark text-white vh-100 p-3">
+    <div class="sidebar-close text-end"><span id="closeSidebar">&times;</span></div>
     <div class="d-flex align-items-center mb-4">
       <img src="logo.svg" alt="Logo" width="30" class="me-2">
       <h4 class="mb-0">Endless Admin</h4>
@@ -88,6 +104,18 @@
 
   document.getElementById("logoutBtn").addEventListener("click", () => {
     auth.signOut().then(() => window.location.href = "index.html");
+  });
+
+  const sidebar = document.getElementById("sidebar");
+  const menuBtn = document.getElementById("menuBtn");
+  const closeBtn = document.getElementById("closeSidebar");
+  menuBtn.addEventListener("click", () => {
+    sidebar.classList.add("show");
+    menuBtn.style.display = "none";
+  });
+  closeBtn.addEventListener("click", () => {
+    sidebar.classList.remove("show");
+    menuBtn.style.display = "inline-block";
   });
 
   const portfolioList = document.getElementById("portfolioList");
