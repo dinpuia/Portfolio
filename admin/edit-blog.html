@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Blog - Endless Admin</title>
+  <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
+  <link rel="stylesheet" href="../assets/css/vendors/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/fonts/remixicon/remixicon.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <style>
+    #editor { height: 200px; background: white; }
+    .preview-img { max-height: 200px; border-radius: 0.5rem; margin-top: 0.5rem; }
+    #sidebar { transition: all 0.3s ease; }
+    .sidebar-toggle {
+      border: 1px solid white;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 1.25rem;
+      color: white;
+      background: none;
+    }
+    [data-bs-theme="light"] .sidebar-toggle {
+      color: black;
+      border-color: black;
+    }
+    .sidebar-close { display: none; }
+    @media (max-width: 768px) {
+      #sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 1050; background-color: #212529; transform: translateX(-100%); }
+      #sidebar.show { transform: translateX(0); }
+      .sidebar-close { display: block; text-align: right; margin-bottom: 1rem; font-size: 1.25rem; cursor: pointer; }
+      #menuBtn { display: block; }
+    }
+    @media (min-width: 769px) {
+      #sidebar { transform: translateX(0) !important; }
+      #menuBtn { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="d-flex">
+  <nav id="sidebar" class="bg-dark text-white vh-100 p-3">
+    <div class="sidebar-close text-end"><span id="closeSidebar">&times;</span></div>
+    <div class="d-flex align-items-center mb-4">
+      <img src="logo.svg" alt="Logo" width="30" class="me-2">
+      <h4 class="mb-0">Endless Admin</h4>
+    </div>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="dashboard.html" class="nav-link text-white">Dashboard</a></li>
+      <li class="nav-item mb-2"><a href="message.html" class="nav-link text-white">Inbox</a></li>
+      <li class="nav-item mb-2"><a href="services.html" class="nav-link text-white">Services</a></li>
+      <li class="nav-item mb-2"><a href="portfolio.html" class="nav-link text-white">Portfolio</a></li>
+      <li class="nav-item mb-2"><a href="blog.html" class="nav-link active">Blog</a></li>
+      <li class="nav-item mb-2"><a href="settings.html" class="nav-link text-white">Setting</a></li>
+      <li class="nav-item mt-4"><a href="#" id="logoutBtn" class="nav-link text-danger">Log Out</a></li>
+    </ul>
+  </nav>  <div class="flex-grow-1 p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+      <div class="d-flex align-items-center gap-3">
+        <button id="menuBtn" class="sidebar-toggle"><i class="ri-menu-line"></i></button>
+        <h2 class="fw-bold mb-0">Edit Blog</h2>
+      </div>
+      <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
+    </div><form id="editForm">
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    <input type="text" id="title" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Author</label>
+    <input type="text" id="author" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Short Description</label>
+    <textarea id="description" class="form-control" rows="3" required></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Conclusion</label>
+    <textarea id="conclusion" class="form-control" rows="2" required></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Cover Photo</label>
+    <input type="file" id="cover" class="form-control" accept="image/*">
+    <div id="preview" class="mt-2"></div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Full Content</label>
+    <div id="editor"></div>
+  </div>
+  <button type="submit" class="btn btn-primary">Update Blog</button>
+</form>
+
+  </div>
+</div><script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script><script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script><script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
+    authDomain: "endless-grafix-admin-5fff7.firebaseapp.com",
+    projectId: "endless-grafix-admin-5fff7",
+    storageBucket: "endless-grafix-admin-5fff7.appspot.com",
+    messagingSenderId: "685694239178",
+    appId: "1:685694239178:web:e3bbe47e8c32a0df4f8f33",
+    measurementId: "G-T41P34TGKQ"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const quill = new Quill('#editor', { theme: 'snow' });
+
+  const id = new URLSearchParams(window.location.search).get("id");
+  let coverUrl = "";
+
+  db.collection("blogs").doc(id).get().then(doc => {
+    if (!doc.exists) return alert("Blog not found");
+    const data = doc.data();
+    document.getElementById("title").value = data.title;
+    document.getElementById("author").value = data.author;
+    document.getElementById("description").value = data.description;
+    document.getElementById("conclusion").value = data.conclusion;
+    quill.root.innerHTML = data.content;
+    coverUrl = data.image;
+    document.getElementById("preview").innerHTML = `<img src="${coverUrl}" class="img-fluid preview-img">`;
+  });
+
+  document.getElementById("cover").addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "portfolio_unsigned");
+    const res = await fetch("https://api.cloudinary.com/v1_1/dinpui98/image/upload", { method: "POST", body: formData });
+    const data = await res.json();
+    coverUrl = data.secure_url;
+    document.getElementById("preview").innerHTML = `<img src="${coverUrl}" class="img-fluid preview-img">`;
+  });
+
+  document.getElementById("editForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const title = document.getElementById("title").value.trim();
+    const author = document.getElementById("author").value.trim();
+    const description = document.getElementById("description").value.trim();
+    const conclusion = document.getElementById("conclusion").value.trim();
+    const content = quill.root.innerHTML.trim();
+
+    if (!title || !author || !description || !conclusion || !content) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    db.collection("blogs").doc(id).update({
+      title,
+      author,
+      description,
+      conclusion,
+      content,
+      image: coverUrl
+    }).then(() => {
+      alert("Blog updated successfully.");
+      window.location.href = "blog.html";
+    }).catch(err => {
+      console.error(err);
+      alert("Failed to update blog.");
+    });
+  });
+
+  const sidebar = document.getElementById("sidebar");
+  const menuBtn = document.getElementById("menuBtn");
+  const closeBtn = document.getElementById("closeSidebar");
+  if (menuBtn && closeBtn) {
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.add("show");
+      menuBtn.style.display = "none";
+    });
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("show");
+      menuBtn.style.display = "inline-block";
+    });
+  }
+  auth.onAuthStateChanged(user => {
+    if (!user) window.location.href = 'index.html';
+  });
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    auth.signOut().then(() => window.location.href = "index.html");
+  });
+  document.getElementById("themeToggle").addEventListener("click", () => {
+    const html = document.documentElement;
+    const theme = html.getAttribute("data-bs-theme");
+    html.setAttribute("data-bs-theme", theme === "dark" ? "light" : "dark");
+  });
+</script><script src="../assets/js/vendors/bootstrap.bundle.min.js"></script></body>
+</html>
