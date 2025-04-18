@@ -8,37 +8,42 @@
   <link rel="stylesheet" href="../assets/fonts/remixicon/remixicon.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
-    #sidebar { transition: all 0.3s ease; }
-    #sidebar.hide { transform: translateX(-100%); }
-    .sidebar-toggle { border: 1px solid white; padding: 6px 10px; border-radius: 4px; font-size: 1.25rem; color: white; background: none; }
-    [data-bs-theme="light"] .sidebar-toggle { color: black; border-color: black; }
-    .sidebar-close { display: none; }
-    @media (max-width: 768px) {
-      #sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 1050; background-color: #212529; transform: translateX(-100%); }
-      #sidebar.show { transform: translateX(0); }
-      .sidebar-close { display: block; text-align: right; margin-bottom: 1rem; font-size: 1.25rem; cursor: pointer; }
-      #menuBtn { display: block; }
-    }
-    @media (min-width: 769px) {
-      #sidebar { transform: translateX(0) !important; }
-      #menuBtn { display: none !important; }
-    }
+  #sidebar { transition: all 0.3s ease; }
+  #sidebar.hide { transform: translateX(-100%); }
+  .sidebar-toggle { border: 1px solid white; padding: 6px 10px; border-radius: 4px; font-size: 1.25rem; color: white; background: none; }
+  [data-bs-theme="light"] .sidebar-toggle { color: black; border-color: black; }
+  .sidebar-close { display: none; }
+  @media (max-width: 768px) {
+    #sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 1050; background-color: #212529; transform: translateX(-100%); }
+    #sidebar.show { transform: translateX(0); }
+    .sidebar-close { display: block; text-align: right; margin-bottom: 1rem; font-size: 1.25rem; cursor: pointer; }
+    #menuBtn { display: block; }
+  }
+  @media (min-width: 769px) {
+    #sidebar { transform: translateX(0) !important; }
+    #menuBtn { display: none !important; }
+  }
+  .card-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
+  }
+  @media (max-width: 768px) {
     .card-description {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 2;
     }
-    @media (max-width: 768px) {
-      .card-description {
-        -webkit-line-clamp: 2;
-      }
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-      transition: all 0.2s ease-in-out;
+  }
+  .card-img-top {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding: 0.5rem;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
     }
   </style>
 </head>
