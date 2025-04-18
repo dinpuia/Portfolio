@@ -4,14 +4,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Endless Grafix Admin</title>
   <link rel="shortcut icon" href="../assets/imgs/template/favicon-gradient.svg" type="image/x-icon">
-  <!-- Bootstrap & Icons -->
   <link rel="stylesheet" href="../assets/css/vendors/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/fonts/remixicon/remixicon.css">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body class="d-flex align-items-center justify-content-center vh-100 bg-dark text-white">  <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%;">
     <div class="text-center mb-4">
-      <img src="logo.svg" alt="Logo" width="50" class="mb-2">
+      <img src="../assets/imgs/template/logo.svg" alt="Logo" width="50" class="mb-2">
       <h4 class="fw-bold">Endless Admin Login</h4>
     </div><form id="loginForm">
   <div class="mb-3">
@@ -27,7 +26,18 @@
 
 <div id="errorMessage" class="text-danger text-center mt-3 d-none">Invalid credentials</div>
 
-  </div>  <!-- Firebase Scripts -->  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>  <script src="firebase.js"></script>  <script>
+  </div>  <!-- Firebase Scripts -->  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
+      authDomain: "endless-grafix-admin-5fff7.firebaseapp.com",
+      projectId: "endless-grafix-admin-5fff7",
+      storageBucket: "endless-grafix-admin-5fff7.appspot.com",
+      messagingSenderId: "685694239178",
+      appId: "1:685694239178:web:e3bbe47e8c32a0df4f8f33",
+      measurementId: "G-T41P34TGKQ"
+    };
+
+    firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
     document.getElementById('loginForm').addEventListener('submit', function(e) {
