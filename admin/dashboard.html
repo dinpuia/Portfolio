@@ -3,7 +3,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard - Endless Grafix</title>
-  <link rel="shortcut icon" href="../assets/imgs/template/favicon-gradient.svg" type="image/x-icon">
+  <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
   <link rel="stylesheet" href="../assets/css/vendors/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/fonts/remixicon/remixicon.css">
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -95,137 +95,13 @@
         </li>
       </ul>
     </nav><div class="flex-grow-1 p-4" style="background-color: var(--bs-body-bg);">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
+  <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+    <div class="d-flex align-items-center gap-3">
       <button id="menuBtn" class="sidebar-toggle"><i class="ri-menu-line"></i></button>
-      <h2 class="fw-bold d-inline ms-3">Welcome, Admin</h2>
+      <h2 class="fw-bold mb-0">Welcome, Admin</h2>
     </div>
     <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
   </div>
 
-  <div class="row text-white">
-    <div class="col-md-3 mb-4">
-      <div class="card bg-info text-center">
-        <div class="card-body">
-          <h6>Visitors</h6>
-          <h4 id="visitorsCount">324</h4>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 mb-4">
-      <div class="card bg-success text-center">
-        <div class="card-body">
-          <h6>Blogs</h6>
-          <h4 id="blogCount">...</h4>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 mb-4">
-      <div class="card bg-warning text-center">
-        <div class="card-body">
-          <h6>Messages</h6>
-          <h4 id="messageCount">...</h4>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 mb-4">
-      <div class="card bg-danger text-center">
-        <div class="card-body">
-          <h6>Portfolio</h6>
-          <h4 id="portfolioCount">...</h4>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Dashboard content continues... -->
 
-  <div class="card mt-4">
-    <div class="card-body">
-      <canvas id="adminChart" height="100"></canvas>
-    </div>
-  </div>
-</div>
-
-  </div>  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const firebaseConfig = {
-        apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
-        authDomain: "endless-grafix-admin-5fff7.firebaseapp.com",
-        projectId: "endless-grafix-admin-5fff7",
-        storageBucket: "endless-grafix-admin-5fff7.appspot.com",
-        messagingSenderId: "685694239178",
-        appId: "1:685694239178:web:e3bbe47e8c32a0df4f8f33",
-        measurementId: "G-T41P34TGKQ"
-      };
-
-      firebase.initializeApp(firebaseConfig);
-      const auth = firebase.auth();
-      const db = firebase.firestore();
-
-      auth.onAuthStateChanged((user) => {
-        if (!user) {
-          window.location.href = "index.html";
-        }
-      });
-
-      document.getElementById("logoutBtn").addEventListener("click", () => {
-        auth.signOut().then(() => {
-          window.location.href = "index.html";
-        });
-      });
-
-      const menuBtn = document.getElementById("menuBtn");
-      const closeBtn = document.getElementById("closeSidebar");
-      const sidebar = document.getElementById("sidebar");
-
-      menuBtn.addEventListener("click", () => {
-        sidebar.classList.add("show");
-        menuBtn.style.display = "none";
-      });
-
-      closeBtn.addEventListener("click", () => {
-        sidebar.classList.remove("show");
-        menuBtn.style.display = "inline-block";
-      });
-
-      // Fetch counts from Firestore
-      const updateCount = (id, count) => document.getElementById(id).textContent = count;
-
-      Promise.all([
-        db.collection("blogs").get(),
-        db.collection("messages").get(),
-        db.collection("portfolio").get()
-      ]).then(([blogsSnap, messagesSnap, portfolioSnap]) => {
-        const blogCount = blogsSnap.size;
-        const messageCount = messagesSnap.size;
-        const portfolioCount = portfolioSnap.size;
-        updateCount("blogCount", blogCount);
-        updateCount("messageCount", messageCount);
-        updateCount("portfolioCount", portfolioCount);
-
-        new Chart(document.getElementById('adminChart').getContext('2d'), {
-          type: 'bar',
-          data: {
-            labels: ['Visitors', 'Blogs', 'Messages', 'Portfolio'],
-            datasets: [{
-              label: 'Total',
-              data: [324, blogCount, messageCount, portfolioCount],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true } }
-          }
-        });
-      });
-    });
-  </script>  <script src="../assets/js/vendors/bootstrap.bundle.min.js"></script>  <script>
-    const toggleBtn = document.getElementById('themeToggle');
-    toggleBtn.addEventListener('click', () => {
-      const html = document.documentElement;
-      const theme = html.getAttribute('data-bs-theme');
-      html.setAttribute('data-bs-theme', theme === 'dark' ? 'light' : 'dark');
-    });
-  </script></body>
-</html>
