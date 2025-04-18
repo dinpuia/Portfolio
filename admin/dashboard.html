@@ -68,7 +68,7 @@
     <nav id="sidebar" class="bg-dark text-white vh-100 p-3">
       <div class="sidebar-close text-end"><span id="closeSidebar">&times;</span></div>
       <div class="d-flex align-items-center mb-4">
-        <img src="logo.svg" alt="Logo" width="30" class="me-2">
+        <img src="../assets/imgs/template/logo.svg" alt="Logo" width="30" class="me-2">
         <h4 class="mb-0">Endless Admin</h4>
       </div>
       <ul class="nav flex-column">
@@ -103,7 +103,6 @@
     <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
   </div>
 
-  <!-- Dashboard Stats -->
   <div class="row text-white">
     <div class="col-md-3 mb-4">
       <div class="card bg-info text-center">
@@ -117,7 +116,7 @@
       <div class="card bg-success text-center">
         <div class="card-body">
           <h6>Blogs</h6>
-          <h4 id="blogCount">12</h4>
+          <h4 id="blogCount">...</h4>
         </div>
       </div>
     </div>
@@ -125,7 +124,7 @@
       <div class="card bg-warning text-center">
         <div class="card-body">
           <h6>Messages</h6>
-          <h4 id="messageCount">48</h4>
+          <h4 id="messageCount">...</h4>
         </div>
       </div>
     </div>
@@ -133,13 +132,12 @@
       <div class="card bg-danger text-center">
         <div class="card-body">
           <h6>Portfolio</h6>
-          <h4 id="portfolioCount">20</h4>
+          <h4 id="portfolioCount">...</h4>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Chart.js -->
   <div class="card mt-4">
     <div class="card-body">
       <canvas id="adminChart" height="100"></canvas>
@@ -147,25 +145,7 @@
   </div>
 </div>
 
-  </div>  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <script>
-    const ctx = document.getElementById('adminChart').getContext('2d');
-    const adminChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Visitors', 'Blogs', 'Messages', 'Portfolio'],
-        datasets: [{
-          label: 'Total',
-          data: [324, 12, 48, 20],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true } }
-      }
-    });
-  </script>  <!-- Firebase SDKs -->  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>  <script>
+  </div>  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>  <script>
     document.addEventListener("DOMContentLoaded", function () {
       const firebaseConfig = {
         apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
@@ -179,6 +159,7 @@
 
       firebase.initializeApp(firebaseConfig);
       const auth = firebase.auth();
+      const db = firebase.firestore();
 
       auth.onAuthStateChanged((user) => {
         if (!user) {
@@ -204,6 +185,39 @@
       closeBtn.addEventListener("click", () => {
         sidebar.classList.remove("show");
         menuBtn.style.display = "inline-block";
+      });
+
+      // Fetch counts from Firestore
+      const updateCount = (id, count) => document.getElementById(id).textContent = count;
+
+      Promise.all([
+        db.collection("blogs").get(),
+        db.collection("messages").get(),
+        db.collection("portfolio").get()
+      ]).then(([blogsSnap, messagesSnap, portfolioSnap]) => {
+        const blogCount = blogsSnap.size;
+        const messageCount = messagesSnap.size;
+        const portfolioCount = portfolioSnap.size;
+        updateCount("blogCount", blogCount);
+        updateCount("messageCount", messageCount);
+        updateCount("portfolioCount", portfolioCount);
+
+        new Chart(document.getElementById('adminChart').getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: ['Visitors', 'Blogs', 'Messages', 'Portfolio'],
+            datasets: [{
+              label: 'Total',
+              data: [324, blogCount, messageCount, portfolioCount],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+          }
+        });
       });
     });
   </script>  <script src="../assets/js/vendors/bootstrap.bundle.min.js"></script>  <script>
