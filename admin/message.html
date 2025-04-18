@@ -1,3 +1,4 @@
+
 <!DOCTYPE html><html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8" />
@@ -8,58 +9,15 @@
   <link rel="stylesheet" href="../assets/fonts/remixicon/remixicon.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
-    #sidebar {
-      transition: all 0.3s ease;
+    .line-clamp {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    #sidebar.hide {
-      transform: translateX(-100%);
-    }
-    .sidebar-toggle {
-      background: none;
-      border: 1px solid white;
-      padding: 6px 10px;
-      border-radius: 4px;
-      font-size: 1.25rem;
-      color: white;
-    }
-    [data-bs-theme="light"] .sidebar-toggle {
-      color: black;
-      border-color: black;
-    }
-    .sidebar-close {
-      display: none;
-    }
-    @media (max-width: 768px) {
-      #sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        z-index: 1000;
-        background-color: #212529;
-        transform: translateX(-100%);
-      }
-      #sidebar.show {
-        transform: translateX(0);
-      }
-      .sidebar-close {
-        display: block;
-        text-align: right;
-        margin-bottom: 1rem;
-        font-size: 1.25rem;
-        cursor: pointer;
-      }
-      #menuBtn {
-        display: block;
-      }
-    }
-    @media (min-width: 769px) {
-      #sidebar {
-        transform: translateX(0) !important;
-      }
-      #menuBtn {
-        display: none !important;
-      }
+    table tr td.message-cell {
+      max-width: 200px;
     }
   </style>
 </head>
@@ -94,8 +52,8 @@
   </div>
 
   <div class="table-responsive">
-    <table class="table table-bordered table-hover table-dark align-middle text-center">
-      <thead>
+    <table class="table table-bordered table-hover align-middle text-center table-striped">
+      <thead class="table-dark">
         <tr>
           <th>Name</th>
           <th>Email</th>
@@ -157,9 +115,12 @@
         row.innerHTML = `
           <td>${data.name}</td>
           <td>${data.email}</td>
-          <td>${data.message}</td>
+          <td class="message-cell line-clamp">${data.message}</td>
           <td>${new Date(data.timestamp?.toDate()).toLocaleString()}</td>
-          <td><button class="btn btn-sm btn-danger" onclick="deleteMessage('${doc.id}')">Delete</button></td>
+          <td>
+            <a href="view-message.html?id=${doc.id}" class="btn btn-sm btn-info">View</a>
+            <button class="btn btn-sm btn-danger" onclick="deleteMessage('${doc.id}')">Delete</button>
+          </td>
         `;
         tableBody.appendChild(row);
       });
