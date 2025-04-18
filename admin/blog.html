@@ -35,15 +35,49 @@
     }
     #sidebar { transition: all 0.3s ease; }
     .sidebar-close { display: none; }
+    .sidebar-toggle {
+      border: 1px solid white;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 1.25rem;
+      color: white;
+      background: none;
+    }
+    [data-bs-theme="light"] .sidebar-toggle {
+      color: black;
+      border-color: black;
+    }
     @media (max-width: 768px) {
-      #sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 1050; background-color: #212529; transform: translateX(-100%); }
-      #sidebar.show { transform: translateX(0); }
-      .sidebar-close { display: block; text-align: right; margin-bottom: 1rem; font-size: 1.25rem; cursor: pointer; }
-      #menuBtn { display: block; }
+      #sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 1050;
+        background-color: #212529;
+        transform: translateX(-100%);
+      }
+      #sidebar.show {
+        transform: translateX(0);
+      }
+      .sidebar-close {
+        display: block;
+        text-align: right;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+        cursor: pointer;
+      }
+      #menuBtn {
+        display: block;
+      }
     }
     @media (min-width: 769px) {
-      #sidebar { transform: translateX(0) !important; }
-      #menuBtn { display: none !important; }
+      #sidebar {
+        transform: translateX(0) !important;
+      }
+      #menuBtn {
+        display: none !important;
+      }
     }
   </style>
 </head>
@@ -65,17 +99,16 @@
       <li class="nav-item mt-4"><a href="#" id="logoutBtn" class="nav-link text-danger">Log Out</a></li>
     </ul>
   </nav>  <div class="flex-grow-1 p-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
       <div class="d-flex align-items-center gap-3">
         <button id="menuBtn" class="sidebar-toggle"><i class="ri-menu-line"></i></button>
         <h2 class="fw-bold mb-0">Blog Posts</h2>
       </div>
-      <div>
+      <div class="d-flex gap-2 align-items-center">
+        <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
         <a href="blog-upload.html" class="btn btn-primary"><i class="ri-add-line me-1"></i> Add New Blog</a>
       </div>
-    </div><div class="row g-4" id="blogList">
-  <!-- Blog cards here -->
-</div>
+    </div><div class="row g-4" id="blogList"></div>
 
   </div>
 </div><script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script><script>
@@ -143,6 +176,11 @@
   });
   document.getElementById("logoutBtn").addEventListener("click", () => {
     auth.signOut().then(() => window.location.href = "index.html");
+  });
+  document.getElementById("themeToggle").addEventListener("click", () => {
+    const html = document.documentElement;
+    const theme = html.getAttribute("data-bs-theme");
+    html.setAttribute("data-bs-theme", theme === "dark" ? "light" : "dark");
   });
 </script><script src="../assets/js/vendors/bootstrap.bundle.min.js"></script></body>
 </html>
