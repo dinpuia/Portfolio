@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Endless Admin</title>
+  <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
+  <link rel="stylesheet" href="../assets/css/vendors/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/fonts/remixicon/remixicon.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    #sidebar { transition: all 0.3s ease; }
+    .sidebar-toggle {
+      border: 1px solid white;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 1.25rem;
+      color: white;
+      background: none;
+    }
+    [data-bs-theme="light"] .sidebar-toggle {
+      color: black;
+      border-color: black;
+    }
+    .sidebar-close { display: none; }
+    @media (max-width: 768px) {
+      #sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 1050; background-color: #212529; transform: translateX(-100%); }
+      #sidebar.show { transform: translateX(0); }
+      .sidebar-close { display: block; text-align: right; margin-bottom: 1rem; font-size: 1.25rem; cursor: pointer; }
+      #menuBtn { display: block; }
+    }
+    @media (min-width: 769px) {
+      #sidebar { transform: translateX(0) !important; }
+      #menuBtn { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="d-flex">
+  <nav id="sidebar" class="bg-dark text-white vh-100 p-3">
+    <div class="sidebar-close text-end"><span id="closeSidebar">&times;</span></div>
+    <div class="d-flex align-items-center mb-4">
+      <img src="logo.svg" alt="Logo" width="30" class="me-2">
+      <h4 class="mb-0">Endless Admin</h4>
+    </div>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="dashboard.html" class="nav-link text-white">Dashboard</a></li>
+      <li class="nav-item mb-2"><a href="message.html" class="nav-link text-white">Inbox</a></li>
+      <li class="nav-item mb-2"><a href="services.html" class="nav-link text-white">Services</a></li>
+      <li class="nav-item mb-2"><a href="portfolio.html" class="nav-link text-white">Portfolio</a></li>
+      <li class="nav-item mb-2"><a href="blog.html" class="nav-link text-white">Blog</a></li>
+      <li class="nav-item mb-2"><a href="settings.html" class="nav-link active">Setting</a></li>
+      <li class="nav-item mt-4"><a href="#" id="logoutBtn" class="nav-link text-danger">Log Out</a></li>
+    </ul>
+  </nav>
+
+  <div class="flex-grow-1 p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+      <div class="d-flex align-items-center gap-3">
+        <button id="menuBtn" class="sidebar-toggle"><i class="ri-menu-line"></i></button>
+        <h2 class="fw-bold mb-0">Settings</h2>
+      </div>
+      <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
+    </div>
+
+    <!-- Admin Profile Section -->
+    <div class="card mb-4">
+      <div class="card-header fw-bold">Admin Profile</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-control" id="adminName">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" id="adminEmail" disabled>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Change Password</label>
+          <input type="password" class="form-control mb-2" id="newPassword" placeholder="New Password">
+          <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+        </div>
+        <button class="btn btn-primary">Save Profile</button>
+      </div>
+    </div>
+
+    <!-- Home Section -->
+    <div class="card mb-4">
+      <div class="card-header fw-bold">Home Settings</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">Navigation</label>
+          <input type="text" class="form-control" id="navSetting">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Footer</label>
+          <textarea class="form-control" rows="2" id="footerSetting"></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Section Content</label>
+          <textarea class="form-control" rows="3" id="sectionSetting"></textarea>
+        </div>
+        <button class="btn btn-primary">Save Home Settings</button>
+      </div>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div class="card">
+      <div class="card-header fw-bold">Contact Us</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" id="contactEmail">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone</label>
+          <input type="text" class="form-control" id="contactPhone">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Address</label>
+          <textarea class="form-control" rows="2" id="contactAddress"></textarea>
+        </div>
+        <button class="btn btn-primary">Save Contact Info</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
+    authDomain: "endless-grafix-admin-5fff7.firebaseapp.com",
+    projectId: "endless-grafix-admin-5fff7",
+    storageBucket: "endless-grafix-admin-5fff7.appspot.com",
+    messagingSenderId: "685694239178",
+    appId: "1:685694239178:web:e3bbe47e8c32a0df4f8f33",
+    measurementId: "G-T41P34TGKQ"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  auth.onAuthStateChanged(user => {
+    if (!user) return (window.location.href = 'index.html');
+    document.getElementById("adminEmail").value = user.email;
+    // You could fetch the user name from Firestore if stored separately
+  });
+
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    auth.signOut().then(() => (window.location.href = "index.html"));
+  });
+
+  document.getElementById("themeToggle").addEventListener("click", () => {
+    const html = document.documentElement;
+    const theme = html.getAttribute("data-bs-theme");
+    html.setAttribute("data-bs-theme", theme === "dark" ? "light" : "dark");
+  });
+
+  const sidebar = document.getElementById("sidebar");
+  const menuBtn = document.getElementById("menuBtn");
+  const closeBtn = document.getElementById("closeSidebar");
+  if (menuBtn && closeBtn) {
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.add("show");
+      menuBtn.style.display = "none";
+    });
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("show");
+      menuBtn.style.display = "inline-block";
+    });
+  }
+</script>
+<script src="../assets/js/vendors/bootstrap.bundle.min.js"></script>
+</body>
+</html>
