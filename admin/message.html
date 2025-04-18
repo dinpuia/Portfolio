@@ -1,13 +1,35 @@
-<!DOCTYPE html><html lang="en" data-bs-theme="dark">
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inbox - Endless Grafix Admin</title>
+  <title>Inbox - Endless Admin</title>
   <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
   <link rel="stylesheet" href="../assets/css/vendors/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/fonts/remixicon/remixicon.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
+    .message-snippet {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      text-overflow: ellipsis;
+      max-width: 400px;
+    }
+    #sidebar { transition: all 0.3s ease; }
+    .sidebar-toggle {
+      border: 1px solid white;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 1.25rem;
+      color: white;
+      background: none;
+    }
+    [data-bs-theme="light"] .sidebar-toggle {
+      color: black;
+      border-color: black;
+    }
     .sidebar-close { display: none; }
     @media (max-width: 768px) {
       #sidebar {
@@ -18,70 +40,29 @@
         z-index: 1050;
         background-color: #212529;
         transform: translateX(-100%);
-        transition: all 0.3s ease;
       }
-      .search-bar {
-      margin-bottom: 20px;
-      margin-right: 80px;/* Add space below the search bar */
-}
-
-.toggle-button {
-  margin-top: 20px;  /* Add space above the toggle */
-}
-      #sidebar.show { transform: translateX(0); }
-      .sidebar-close { display: block; text-align: right; margin-bottom: 1rem; font-size: 1.25rem; cursor: pointer; }
-      #menuBtn { display: block; }
+      #sidebar.show {
+        transform: translateX(0);
+      }
+      .sidebar-close {
+        display: block;
+        text-align: right;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+        cursor: pointer;
+      }
+      #menuBtn {
+        display: block;
+      }
     }
     @media (min-width: 769px) {
-      #sidebar { transform: translateX(0) !important; }
-      #menuBtn { display: none !important; }
+      #sidebar {
+        transform: translateX(0) !important;
+      }
+      #menuBtn {
+        display: none !important;
+      }
     }
-  .inbox-list { display: flex; flex-direction: column; gap: 1rem; }
-  .inbox-item {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    background-color: var(--bs-secondary-bg);
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    transition: background 0.2s;
-  }
-  .inbox-item:hover { background-color: var(--bs-tertiary-bg); }
-  .inbox-avatar {
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #6c757d;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  .inbox-content { flex: 1; min-width: 0; }
-  .inbox-name { font-weight: 600; margin-bottom: 2px; }
-  .inbox-message {
-    font-size: 0.9rem;
-    color: var(--bs-secondary-color);
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-  }
-  @media (min-width: 576px) {
-    .inbox-message { -webkit-line-clamp: 2; }
-  }
-  .inbox-time {
-    font-size: 0.8rem;
-    color: var(--bs-secondary-color);
-    white-space: nowrap;
-  }
-
   </style>
 </head>
 <body>
@@ -93,36 +74,47 @@
       <h4 class="mb-0">Endless Admin</h4>
     </div>
     <ul class="nav flex-column">
-      <li class="nav-item mb-2"><a href="dashboard.html" class="nav-link text-white"><i class="ri-dashboard-line me-2"></i>Dashboard</a></li>
-      <li class="nav-item mb-2"><a href="message.html" class="nav-link active"><i class="ri-mail-line me-2"></i>Message</a></li>
-      <li class="nav-item mb-2"><a href="services.html" class="nav-link text-white"><i class="ri-settings-3-line me-2"></i>Services</a></li>
-      <li class="nav-item mb-2"><a href="portfolio.html" class="nav-link text-white"><i class="ri-briefcase-line me-2"></i>Portfolio</a></li>
-      <li class="nav-item mb-2"><a href="blog.html" class="nav-link text-white"><i class="ri-article-line me-2"></i>Blog</a></li>
-      <li class="nav-item mb-2"><a href="settings.html" class="nav-link text-white"><i class="ri-settings-line me-2"></i>Setting</a></li>
-      <li class="nav-item mt-4"><a href="#" id="logoutBtn" class="nav-link text-danger"><i class="ri-logout-box-line me-2"></i>Log Out</a></li>
+      <li class="nav-item mb-2"><a href="dashboard.html" class="nav-link text-white">Dashboard</a></li>
+      <li class="nav-item mb-2"><a href="message.html" class="nav-link active">Inbox</a></li>
+      <li class="nav-item mb-2"><a href="services.html" class="nav-link text-white">Services</a></li>
+      <li class="nav-item mb-2"><a href="portfolio.html" class="nav-link text-white">Portfolio</a></li>
+      <li class="nav-item mb-2"><a href="blog.html" class="nav-link text-white">Blog</a></li>
+      <li class="nav-item mb-2"><a href="settings.html" class="nav-link text-white">Setting</a></li>
+      <li class="nav-item mt-4"><a href="#" id="logoutBtn" class="nav-link text-danger">Log Out</a></li>
     </ul>
-  </nav>  <div class="flex-grow-1 p-4">
+  </nav>
+
+  <div class="flex-grow-1 p-4">
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
       <div class="d-flex align-items-center gap-3">
-        <button id="menuBtn" class="sidebar-toggle btn btn-sm btn-outline-light"><i class="ri-menu-line"></i></button>
- <h2 class="fw-bold mb-0">Inbox</h2>
+        <button id="menuBtn" class="sidebar-toggle"><i class="ri-menu-line"></i></button>
+        <h2 class="fw-bold mb-0">Inbox</h2>
       </div>
- </div>
-  <button id="themeToggle" class="btn btn-outline-light">
-    <i class="ri-moon-line"></i>
-  </button>
-</div>
-  
-<div class="d-flex justify-content-between align-items-center">
-<div class="d-flex gap-2 align-items-center flex-wrap margin-bottom: 1rem">
-        <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search by name or email...">
-     
+      <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
+    </div>
 
-      
-    </div><div id="inboxList" class="inbox-list"></div>
-
+    <div class="table-responsive">
+      <table class="table table-hover text-white">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="messageTable"></tbody>
+      </table>
+    </div>
   </div>
-</div><script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script><script>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+<script>
   const firebaseConfig = {
     apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
     authDomain: "endless-grafix-admin-5fff7.firebaseapp.com",
@@ -132,68 +124,43 @@
     appId: "1:685694239178:web:e3bbe47e8c32a0df4f8f33",
     measurementId: "G-T41P34TGKQ"
   };
-
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
   const db = firebase.firestore();
 
+  const messageTable = document.getElementById("messageTable");
+  db.collection("messages").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+    messageTable.innerHTML = "";
+    snapshot.forEach(doc => {
+      const d = doc.data();
+      const html = `
+        <tr>
+          <td>${d.name}</td>
+          <td>${d.email}</td>
+          <td>${d.subject}</td>
+          <td class="message-snippet">${d.message}</td>
+          <td>${new Date(d.timestamp?.toDate()).toLocaleDateString()}</td>
+          <td><a href="message-view.html?id=${doc.id}" class="btn btn-sm btn-info">View</a></td>
+        </tr>
+      `;
+      messageTable.insertAdjacentHTML("beforeend", html);
+    });
+  });
+
   auth.onAuthStateChanged(user => {
     if (!user) window.location.href = 'index.html';
   });
-
   document.getElementById("logoutBtn").addEventListener("click", () => {
     auth.signOut().then(() => window.location.href = "index.html");
   });
-
-  const inboxList = document.getElementById("inboxList");
-  let allMessages = [];
-
-  function renderInbox(messages) {
-    inboxList.innerHTML = "";
-    messages.forEach(doc => {
-      const data = doc.data();
-      const name = data.name || "Unknown";
-      const email = data.email || "-";
-      const msg = data.message || "(No content)";
-      const timestamp = data.timestamp?.toDate();
-      const dateStr = timestamp ? new Date(timestamp).toLocaleDateString() : "";
-      const initials = name.split(" ").map(n => n[0]).join("").slice(0,2).toUpperCase();
-
-      inboxList.innerHTML += `
-        <a href="view-message.html?id=${doc.id}" class="text-decoration-none text-reset">
-          <div class="inbox-item">
-            <div class="inbox-avatar">${initials}</div>
-            <div class="inbox-content">
-              <div class="inbox-name">${name}</div>
-              <div class="inbox-message">${msg}</div>
-            </div>
-            <div class="inbox-time">${dateStr}</div>
-          </div>
-        </a>
-      `;
-    });
-  }
-
-  db.collection("messages").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-    allMessages = snapshot.docs;
-    renderInbox(allMessages);
+  document.getElementById("themeToggle").addEventListener("click", () => {
+    const html = document.documentElement;
+    const theme = html.getAttribute("data-bs-theme");
+    html.setAttribute("data-bs-theme", theme === "dark" ? "light" : "dark");
   });
-
-  document.getElementById("searchInput").addEventListener("input", e => {
-    const value = e.target.value.toLowerCase();
-    const filtered = allMessages.filter(doc => {
-      const data = doc.data();
-      return (
-        data.name?.toLowerCase().includes(value) ||
-        data.email?.toLowerCase().includes(value)
-      );
-    });
-    renderInbox(filtered);
-  });
-
+  const sidebar = document.getElementById("sidebar");
   const menuBtn = document.getElementById("menuBtn");
   const closeBtn = document.getElementById("closeSidebar");
-  const sidebar = document.getElementById("sidebar");
   if (menuBtn && closeBtn) {
     menuBtn.addEventListener("click", () => {
       sidebar.classList.add("show");
@@ -204,12 +171,8 @@
       menuBtn.style.display = "inline-block";
     });
   }
-</script><script src="../assets/js/vendors/bootstrap.bundle.min.js"></script><script>
-  const toggleBtn = document.getElementById('themeToggle');
-  toggleBtn.addEventListener('click', () => {
-    const html = document.documentElement;
-    const theme = html.getAttribute('data-bs-theme');
-    html.setAttribute('data-bs-theme', theme === 'dark' ? 'light' : 'dark');
-  });
-</script></body>
+</script>
+<script src="../assets/js/vendors/bootstrap.bundle.min.js"></script>
+</body>
 </html>
+
