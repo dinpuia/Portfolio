@@ -103,11 +103,49 @@
     <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
   </div>
 
-  <!-- Additional dashboard content goes here -->
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="card text-bg-primary">
+        <div class="card-body text-center">
+          <h6>Visitors</h6>
+          <h3 id="visitorsCount">324</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-bg-success">
+        <div class="card-body text-center">
+          <h6>Blogs</h6>
+          <h3 id="blogCount">...</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-bg-warning">
+        <div class="card-body text-center">
+          <h6>Messages</h6>
+          <h3 id="messageCount">...</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-bg-danger">
+        <div class="card-body text-center">
+          <h6>Portfolio</h6>
+          <h3 id="portfolioCount">...</h3>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div class="card mt-5">
+    <div class="card-body">
+      <canvas id="adminChart" height="120"></canvas>
+    </div>
+  </div>
 </div>
 
-  </div>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>  <script>
+  </div>  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>  <script>
     document.addEventListener("DOMContentLoaded", function () {
       const firebaseConfig = {
         apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
@@ -121,6 +159,7 @@
 
       firebase.initializeApp(firebaseConfig);
       const auth = firebase.auth();
+      const db = firebase.firestore();
 
       auth.onAuthStateChanged((user) => {
         if (!user) {
@@ -146,6 +185,39 @@
       closeBtn.addEventListener("click", () => {
         sidebar.classList.remove("show");
         menuBtn.style.display = "inline-block";
+      });
+
+      const updateCount = (id, count) => document.getElementById(id).textContent = count;
+
+      Promise.all([
+        db.collection("blogs").get(),
+        db.collection("messages").get(),
+        db.collection("portfolio").get()
+      ]).then(([blogsSnap, messagesSnap, portfolioSnap]) => {
+        const blogCount = blogsSnap.size;
+        const messageCount = messagesSnap.size;
+        const portfolioCount = portfolioSnap.size;
+        updateCount("blogCount", blogCount);
+        updateCount("messageCount", messageCount);
+        updateCount("portfolioCount", portfolioCount);
+
+        new Chart(document.getElementById('adminChart').getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: ['Visitors', 'Blogs', 'Messages', 'Portfolio'],
+            datasets: [{
+              label: 'Total',
+              data: [324, blogCount, messageCount, portfolioCount],
+              backgroundColor: ['#0d6efd', '#198754', '#ffc107', '#dc3545'],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+          }
+        });
       });
     });
   </script>  <script src="../assets/js/vendors/bootstrap.bundle.min.js"></script>  <script>
