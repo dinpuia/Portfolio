@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<!DOCTYPE html><html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +15,7 @@
     <!-- Sidebar -->
     <nav id="sidebar" class="bg-dark text-white vh-100 p-3" style="width: 240px;">
       <div class="d-flex align-items-center mb-4">
-        <img src="logo.svg" alt="Logo" width="30" class="me-2">
+        <img src="../assets/imgs/template/logo.svg" alt="Logo" width="30" class="me-2">
         <h4 class="mb-0">Endless Admin</h4>
       </div>
       <ul class="nav flex-column">
@@ -42,78 +41,72 @@
           <a href="#" id="logoutBtn" class="nav-link text-danger"><i class="ri-logout-box-line me-2"></i>Log Out</a>
         </li>
       </ul>
-    </nav>
+    </nav><!-- Main Content -->
+<div class="flex-grow-1 p-4" style="background-color: var(--bs-body-bg);">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Dashboard</h2>
+    <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
+  </div>
 
-    <!-- Main Content -->
-    <div class="flex-grow-1 p-4" style="background-color: var(--bs-body-bg);">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">Dashboard</h2>
-        <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
+  <div class="row">
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card text-white bg-primary">
+        <div class="card-body">
+          <h5 class="card-title">Messages</h5>
+          <p class="card-text">Check incoming messages.</p>
+        </div>
       </div>
-
-      <div class="row">
-        <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card text-white bg-primary">
-            <div class="card-body">
-              <h5 class="card-title">Messages</h5>
-              <p class="card-text">Check incoming messages.</p>
-            </div>
-          </div>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card text-white bg-success">
+        <div class="card-body">
+          <h5 class="card-title">Portfolio</h5>
+          <p class="card-text">Manage your creative works.</p>
         </div>
-        <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card text-white bg-success">
-            <div class="card-body">
-              <h5 class="card-title">Portfolio</h5>
-              <p class="card-text">Manage your creative works.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card text-white bg-warning">
-            <div class="card-body">
-              <h5 class="card-title">Blog</h5>
-              <p class="card-text">Post latest updates.</p>
-            </div>
-          </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card text-white bg-warning">
+        <div class="card-body">
+          <h5 class="card-title">Blog</h5>
+          <p class="card-text">Post latest updates.</p>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Firebase Auth Check -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>
-  <script src="firebase.js"></script>
-  <script>
+  </div>  <!-- Firebase Scripts -->  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
+      authDomain: "endless-grafix-admin-5fff7.firebaseapp.com",
+      projectId: "endless-grafix-admin-5fff7",
+      storageBucket: "endless-grafix-admin-5fff7.appspot.com",
+      messagingSenderId: "685694239178",
+      appId: "1:685694239178:web:e3bbe47e8c32a0df4f8f33",
+      measurementId: "G-T41P34TGKQ"
+    };
+
+    firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    // Auth check on page load
     auth.onAuthStateChanged((user) => {
-  if (!user) {
-    window.location.href = "index.html";
-  }
-});
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
 
-
-    // Logout button
-    const logoutBtn = document.getElementById("logoutBtn");
-    logoutBtn.addEventListener("click", () => {
+    document.getElementById("logoutBtn").addEventListener("click", () => {
       auth.signOut().then(() => {
         window.location.href = "index.html";
       });
     });
-  </script>
-
-  <!-- Bootstrap JS -->
-  <script src="../assets/js/vendors/bootstrap.bundle.min.js"></script>
-  <!-- Theme Toggle -->
-  <script>
+  </script>  <!-- Bootstrap JS -->  <script src="../assets/js/vendors/bootstrap.bundle.min.js"></script>  <script>
     const toggleBtn = document.getElementById('themeToggle');
     toggleBtn.addEventListener('click', () => {
       const html = document.documentElement;
       const theme = html.getAttribute('data-bs-theme');
       html.setAttribute('data-bs-theme', theme === 'dark' ? 'light' : 'dark');
     });
-  </script>
-</body>
+  </script></body>
 </html>
