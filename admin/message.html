@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages - Endless Grafix Admin</title>
+  <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
+  <link rel="stylesheet" href="../assets/css/vendors/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/fonts/remixicon/remixicon.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    #sidebar {
+      transition: all 0.3s ease;
+    }
+    #sidebar.hide {
+      transform: translateX(-100%);
+    }
+    .sidebar-toggle {
+      background: none;
+      border: 1px solid white;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 1.25rem;
+      color: white;
+    }
+    [data-bs-theme="light"] .sidebar-toggle {
+      color: black;
+      border-color: black;
+    }
+    .sidebar-close {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      #sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 1000;
+        background-color: #212529;
+        transform: translateX(-100%);
+      }
+      #sidebar.show {
+        transform: translateX(0);
+      }
+      .sidebar-close {
+        display: block;
+        text-align: right;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+        cursor: pointer;
+      }
+      #menuBtn {
+        display: block;
+      }
+    }
+    @media (min-width: 769px) {
+      #sidebar {
+        transform: translateX(0) !important;
+      }
+      #menuBtn {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="d-flex">
+    <nav id="sidebar" class="bg-dark text-white vh-100 p-3">
+      <div class="sidebar-close text-end"><span id="closeSidebar">&times;</span></div>
+      <div class="d-flex align-items-center mb-4">
+        <img src="logo.svg" alt="Logo" width="30" class="me-2">
+        <h4 class="mb-0">Endless Admin</h4>
+      </div>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2"><a href="dashboard.html" class="nav-link text-white"><i class="ri-dashboard-line me-2"></i>Dashboard</a></li>
+        <li class="nav-item mb-2"><a href="message.html" class="nav-link active"><i class="ri-mail-line me-2"></i>Message</a></li>
+        <li class="nav-item mb-2"><a href="services.html" class="nav-link text-white"><i class="ri-settings-3-line me-2"></i>Services</a></li>
+        <li class="nav-item mb-2"><a href="portfolio.html" class="nav-link text-white"><i class="ri-briefcase-line me-2"></i>Portfolio</a></li>
+        <li class="nav-item mb-2"><a href="blog.html" class="nav-link text-white"><i class="ri-article-line me-2"></i>Blog</a></li>
+        <li class="nav-item mb-2"><a href="settings.html" class="nav-link text-white"><i class="ri-settings-line me-2"></i>Setting</a></li>
+        <li class="nav-item mt-4"><a href="#" id="logoutBtn" class="nav-link text-danger"><i class="ri-logout-box-line me-2"></i>Log Out</a></li>
+      </ul>
+    </nav><div class="flex-grow-1 p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <div class="d-flex align-items-center gap-3">
+      <button id="menuBtn" class="sidebar-toggle"><i class="ri-menu-line"></i></button>
+      <h2 class="fw-bold mb-0">Messages</h2>
+    </div>
+    <div class="d-flex gap-2 align-items-center">
+      <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search by name or email..." />
+      <button id="exportBtn" class="btn btn-sm btn-outline-success"><i class="ri-download-line me-1"></i>Export</button>
+      <button id="themeToggle" class="btn btn-outline-light"><i class="ri-moon-line"></i></button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover table-dark align-middle text-center">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Message</th>
+          <th>Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="messageTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+  </div>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
+      authDomain: "endless-grafix-admin-5fff7.firebaseapp.com",
+      projectId: "endless-grafix-admin-5fff7",
+      storageBucket: "endless-grafix-admin-5fff7.appspot.com",
+      messagingSenderId: "685694239178",
+      appId: "1:685694239178:web:e3bbe47e8c32a0df4f8f33",
+      measurementId: "G-T41P34TGKQ"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    auth.onAuthStateChanged(user => {
+      if (!user) window.location.href = 'index.html';
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      auth.signOut().then(() => window.location.href = "index.html");
+    });
+
+    const menuBtn = document.getElementById("menuBtn");
+    const closeBtn = document.getElementById("closeSidebar");
+    const sidebar = document.getElementById("sidebar");
+    if (menuBtn && closeBtn) {
+      menuBtn.addEventListener("click", () => {
+        sidebar.classList.add("show");
+        menuBtn.style.display = "none";
+      });
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.remove("show");
+        menuBtn.style.display = "inline-block";
+      });
+    }
+
+    const tableBody = document.getElementById("messageTableBody");
+    let allMessages = [];
+
+    function renderMessages(messages) {
+      tableBody.innerHTML = "";
+      messages.forEach(doc => {
+        const data = doc.data();
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${data.name}</td>
+          <td>${data.email}</td>
+          <td>${data.message}</td>
+          <td>${new Date(data.timestamp?.toDate()).toLocaleString()}</td>
+          <td><button class="btn btn-sm btn-danger" onclick="deleteMessage('${doc.id}')">Delete</button></td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    db.collection("messages").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+      allMessages = snapshot.docs;
+      renderMessages(allMessages);
+    });
+
+    function deleteMessage(id) {
+      if (confirm("Delete this message?")) {
+        db.collection("messages").doc(id).delete();
+      }
+    }
+
+    document.getElementById("searchInput").addEventListener("input", e => {
+      const value = e.target.value.toLowerCase();
+      const filtered = allMessages.filter(doc => {
+        const data = doc.data();
+        return (
+          data.name.toLowerCase().includes(value) ||
+          data.email.toLowerCase().includes(value)
+        );
+      });
+      renderMessages(filtered);
+    });
+
+    document.getElementById("exportBtn").addEventListener("click", () => {
+      let csv = "Name,Email,Message,Time\n";
+      const rows = tableBody.querySelectorAll("tr");
+      rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        const line = Array.from(cells).slice(0, 4).map(td => '"' + td.innerText.replace(/"/g, '""') + '"').join(",");
+        csv += line + "\n";
+      });
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "messages.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  </script>  <script src="../assets/js/vendors/bootstrap.bundle.min.js"></script>  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    toggleBtn.addEventListener('click', () => {
+      const html = document.documentElement;
+      const theme = html.getAttribute('data-bs-theme');
+      html.setAttribute('data-bs-theme', theme === 'dark' ? 'light' : 'dark');
+    });
+  </script></body>
+</html>
