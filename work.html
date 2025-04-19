@@ -421,14 +421,14 @@
               <p class="fs-7 text-400 mb-1"><strong>Tools:</strong> ${data.tools || 'N/A'}</p>
             </div>
           </div>
-        </div>
-      `;
-
-      portfolioList.insertAdjacentHTML("beforeend", html);
+      </div>`;
+        container.innerHTML += html;
+      });
+    })
+    .catch(error => {
+      document.getElementById("portfolioList").innerHTML = `<p class="text-danger">Failed to load portfolio.</p>`;
+      console.error("Portfolio load error:", error);
     });
-
-    if (window.AOS) AOS.refresh();
-  });
 </script>
 
 
