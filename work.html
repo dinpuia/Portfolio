@@ -377,6 +377,8 @@
         </div>
     </div>
 </section>
+
+
 <!-- Firebase SDKs -->
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
@@ -474,48 +476,7 @@
 
 
 
-<!-- Firebase -->
 
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
-    authDomain: "endless-grafix-admin-5fff7.firebaseapp.com",
-    projectId: "endless-grafix-admin-5fff7"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-
-  const portfolioList = document.getElementById("portfolioList");
-
-  db.collection("portfolio").orderBy("timestamp", "desc").get().then(snapshot => {
-    snapshot.forEach(doc => {
-      const data = doc.data();
-
-      const html = `
-        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="portfolio-card rounded-4 overflow-hidden position-relative">
-            <div class="portfolio-thumb zoom-img rounded-4 overflow-hidden">
-              <img src="${data.image}" alt="${data.title}" class="w-100 h-auto" />
-            </div>
-            <div class="portfolio-content mt-3">
-              <h5 class="portfolio-title mb-1">${data.title}</h5>
-              <p class="text-muted mb-1 text-uppercase fs-7">${data.category || ''}</p>
-              <p class="text-300 mb-1 line-clamp-3">${data.description || ''}</p>
-              <p class="fs-7 text-400 mb-1"><strong>Client:</strong> ${data.client || 'N/A'}</p>
-              <p class="fs-7 text-400 mb-1"><strong>Tools:</strong> ${data.tools || 'N/A'}</p>
-            </div>
-          </div>
-        </div>
-      `;
-
-      portfolioList.insertAdjacentHTML("beforeend", html);
-    });
-
-    if (window.AOS) AOS.refresh();
-  });
-</script>
 <script>
   window.addEventListener("load", () => {
     const preloader = document.getElementById("preloader");
