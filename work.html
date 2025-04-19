@@ -475,7 +475,11 @@
 
 
 <!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script><script>
+
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+
+
+<script>
   const firebaseConfig = {
     apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
     authDomain: "endless-grafix-admin-5fff7.firebaseapp.com",
@@ -510,11 +514,9 @@
       portfolioList.insertAdjacentHTML("beforeend", html);
     });
 
-    // Trigger AOS animation refresh
-    if (window.AOS) AOS.refresh();
+    if (window.AOS) AOS.refresh(); // Re-trigger animations
   });
 </script>
-
 
 
         <!-- Libs JS -->
