@@ -476,9 +476,8 @@
 
 <!-- Firebase -->
 
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
-
-
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
 <script>
   const firebaseConfig = {
     apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
@@ -502,10 +501,10 @@
             </div>
             <div class="portfolio-content mt-3">
               <h5 class="portfolio-title mb-1">${data.title}</h5>
-              <p class="text-muted mb-1 text-uppercase fs-7">${data.category}</p>
-              <p class="text-300 mb-1 line-clamp-3">${data.description}</p>
-              <p class="fs-7 text-400 mb-1"><strong>Client:</strong> ${data.client || "N/A"}</p>
-              <p class="fs-7 text-400 mb-1"><strong>Tools:</strong> ${data.tools || "N/A"}</p>
+              <p class="text-muted mb-1 text-uppercase fs-7">${data.category || ''}</p>
+              <p class="text-300 mb-1 line-clamp-3">${data.description || ''}</p>
+              <p class="fs-7 text-400 mb-1"><strong>Client:</strong> ${data.client || 'N/A'}</p>
+              <p class="fs-7 text-400 mb-1"><strong>Tools:</strong> ${data.tools || 'N/A'}</p>
             </div>
           </div>
         </div>
@@ -514,29 +513,11 @@
       portfolioList.insertAdjacentHTML("beforeend", html);
     });
 
-    if (window.AOS) AOS.refresh(); // Re-trigger animations
+    if (window.AOS) AOS.refresh();
   });
 </script>
 
 
-        <!-- Libs JS -->
-<script src="assets/js/vendors/jquery-3.7.1.min.js"></script>
-<script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
-<script src="assets/js/vendors/swiper-bundle.min.js"></script>
-<script src="assets/js/vendors/aos.js"></script>
-<script src="assets/js/vendors/wow.min.js"></script>
-<script src="assets/js/vendors/smart-stick-nav.js"></script>
-<script src="assets/js/vendors/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/vendors/gsap.min.js"></script>
-<script src="assets/js/vendors/imagesloaded.pkgd.min.js"></script>
-<script src="assets/js/vendors/isotope.pkgd.min.js"></script>
-<script src="assets/js/vendors/ScrollTrigger.min.js"></script>
-<script src="assets/js/vendors/jquery.carouselTicker.min.js"></script>
-<script src="assets/js/vendors/jquery.odometer.min.js"></script>
-<script src="assets/js/vendors/jquery.appear.js"></script>
-<script src="assets/js/vendors/gsap-custom.js"></script>
-<script src="assets/js/imageRevealHover.js"></script>
-<script src="assets/js/vendors/aat.min.js"></script>
 <!-- Theme JS -->
 <script src="assets/js/main.js"></script>
 
