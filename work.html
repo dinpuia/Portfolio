@@ -386,8 +386,9 @@
 </section>
 <!-- Firebase -->
 
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+<<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+
 <script>
   const firebaseConfig = {
     apiKey: "AIzaSyDeXPI59Y1t3EqcS11_05Qyc-i16o5iriQ",
@@ -397,13 +398,16 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  const portfolioList = document.getElementById("portfolioList");
+  db.collection("portfolio")
+    .orderBy("timestamp", "desc")
+    .get()
+    .then(snapshot => {
+      const container = document.getElementById("portfolioList");
+      container.innerHTML = "";
 
-  db.collection("portfolio").orderBy("timestamp", "desc").get().then(snapshot => {
-    snapshot.forEach(doc => {
-      const data = doc.data();
-
-      const html = `
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const html = '
         <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
           <div class="portfolio-card rounded-4 overflow-hidden position-relative">
             <div class="portfolio-thumb zoom-img rounded-4 overflow-hidden">
