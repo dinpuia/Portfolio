@@ -1,149 +1,387 @@
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Endless Grafix - Portfolio Listing</title>
+    <head>
+        <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<title>Endless Grafix - Portfolio listing</title>
+<script src="assets/js/vendors/color-modes.js"></script>
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon-gradient.svg" />
+<!-- Libs CSS -->
+<link rel="stylesheet" href="assets/css/vendors/bootstrap.min.css" />
+<link rel="stylesheet" href="assets/css/vendors/swiper-bundle.min.css" />
+<link rel="stylesheet" href="assets/css/vendors/aos.css" />
+<link rel="stylesheet" href="assets/css/vendors/odometer.css" />
+<link rel="stylesheet" href="assets/css/vendors/carouselTicker.css" />
+<link rel="stylesheet" href="assets/css/vendors/magnific-popup.css" />
+<link rel="stylesheet" href="assets/fonts/remixicon/remixicon.css" />
+<link rel="stylesheet" href="assets/fonts/satoshi/satoshi.css" />
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:wght@400..900&family=Urbanist:wght@100..900&display=swap" rel="stylesheet" />
+<!-- Main CSS -->
+<link rel="stylesheet" href="assets/css/main.css" />
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon-gradient.svg" />
+    </head>
+    <body>
+        <!-- prettier-ignore -->
+        <!--Preloader-->
+<div id="preloader">
+    <div class="loader-cover">
+        <div class="loader-container">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+</div>
+<!--Preloader-end -->
 
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="assets/css/vendors/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/vendors/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="assets/css/vendors/aos.css" />
-    <link rel="stylesheet" href="assets/css/vendors/odometer.css" />
-    <link rel="stylesheet" href="assets/css/vendors/carouselTicker.css" />
-    <link rel="stylesheet" href="assets/css/vendors/magnific-popup.css" />
-    <link rel="stylesheet" href="assets/fonts/remixicon/remixicon.css" />
-    <link rel="stylesheet" href="assets/fonts/satoshi/satoshi.css" />
+        <!-- Navbar -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light w-100 flex-nowrap z-999 p-0">
+        <a href="#" class="navbar-menu p-4 text-center square-100 menu-tigger icon_80 icon-shape d-none d-md-flex" data-bs-target=".offCanvas__info" aria-controls="offCanvas__info">
+            <i class="ri-menu-2-line"></i>
+        </a>
+        <div class="container py-3 px-0">
+            <a class="navbar-brand d-flex main-logo align-items-center ms-lg-0 ms-md-5 ms-3" href="index.html">
+                <img src="assets/imgs/template/favicon.svg" alt="zelio" style="width: 40px; height: auto;"/>
+                <span class="fs-4 ms-2">endless.grafix</span>
+            </a>
+            <div class="d-none d-lg-flex"><div class="main-menu">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+            
+        </li>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:wght@400..900&family=Urbanist:wght@100..900&display=swap" rel="stylesheet" />
+        <li class="nav-item has-children">
+            <a class="nav-link" href="services.html">Services</a>
+            <ul class="sub-menu">
+                <li><a href="graphic.html">Graphic Design</a></li>
+                <li><a href="motion.html">Motion Graphic</a></li>
+                <li><a href="Photo.html">Photo Restoration</a></li>
+                <li><a href="web.html">Web Design</a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="work.html">Portfolio</a>
+        </li>
 
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="assets/css/main.css" />
-</head>
-<body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="loader-cover">
-            <div class="loader-container">
-                <div class="loader-icon"></div>
+
+        <li class="nav-item">
+            <a class="nav-link" href="blog-list.html">Blog</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+        </li>
+    </ul>
+</div>
+</div>
+            <div class="navbar-social d-flex align-items-center pe-5 pe-lg-0 me-5 me-lg-0">
+                <div class="d-md-flex d-none gap-3">
+                    <a href="https://www.facebook.com/share/1Af4TZfeSV/">
+                    <i class="ri-facebook-circle-fill fs-18"></i>
+                </a>
+                <a href="http://instagram.com/endless.grafix">
+                    <i class="ri-instagram-fill fs-18"></i>
+                </a>
+                <a href="https://www.behance.net/xendless">
+                    <i class="ri-behance-fill fs-18"></i>
+                </a>
+                <a href="https://github.com/dinpuia">
+                    <i class="ri-github-fill fs-18"></i>
+                </a>
+                </div>
+                <div class="burger-icon burger-icon-white border rounded-3">
+                    <span class="burger-icon-top"></span>
+                    <span class="burger-icon-mid"></span>
+                    <span class="burger-icon-bottom"></span>
+                </div>
+            </div>
+        </div>
+        <div class="dark-light-switcher pe-10 pe-lg-0 pe-0 ps-md-5 ps-0 ps-lg-4 pe-lg-4 d-flex justify-content-center align-items-center icon_80 @@classList">
+    <i class="ri-sun-fill text-warning"></i>
+    <i class="ri-contrast-2-line text-white"></i>
+</div>
+
+    </nav>
+    <!-- offCanvas-menu -->
+<div class="offCanvas__info">
+    <div class="offCanvas__close-icon menu-close">
+        <button><i class="ri-close-line"></i></button>
+    </div>
+    <div class="offCanvas__logo mb-5"><h3 class="mb-0">Get in touch</h3></div>
+    <div class="offCanvas__side-info mb-30">
+        <div class="contact-list mb-30">
+            <p class="fs-6 fw-medium text-200 mb-5">I’m thrilled to explore new opportunities, tackle exciting projects, and collaborate with creative and forward-thinking individuals.</p>
+            <div class="mb-3">
+                <span class="text-400 fs-5">Phone Number</span>
+                <p class="mb-0">+91 8837427875</p>
+            </div>
+            <div class="mb-3">
+                <span class="text-400 fs-5">Email</span>
+                <p class="mb-0">contact@endlessgrafix.in</p>
+            </div>
+            <div class="mb-3">
+                <span class="text-400 fs-5">Instagram</span>
+                <p class="mb-0">endless.grafix</p>
+            </div>
+            <div class="mb-3">
+                <span class="text-400 fs-5">Address</span>
+                <p class="mb-0">Upper Kanan Aizawl, Mizoram</p>
+            </div>
+        </div>
+
+        <div class="contact-list">
+            <p class="text-400 fs-5 mb-2">Social</p>
+            <div class="d-md-flex d-none gap-3">
+                <a href="http://facebook.com">
+                    <i class="ri-facebook-circle-fill fs-18"></i>
+                </a>
+                <a href="http://twitter.com">
+                    <i class="ri-instagram-fill fs-18"></i>
+                </a>
+                <a href="http://linkedin.com">
+                    <i class="ri-behance-fill fs-18"></i>
+                </a>
+                <a href="http://https://github.com/dinpuia">
+                    <i class="ri-github-fill fs-18"></i>
+                </a>
             </div>
         </div>
     </div>
-    <!-- Preloader End -->
-
-    <!-- Navbar -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light w-100 flex-nowrap z-999 p-0">
-            <a href="#" class="navbar-menu p-4 text-center square-100 menu-tigger icon_80 icon-shape d-none d-md-flex" data-bs-target=".offCanvas__info" aria-controls="offCanvas__info">
-                <i class="ri-menu-2-line"></i>
+</div>
+<div class="offCanvas__overly"></div>
+ <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar button-bg-2">
+    <div class="mobile-header-wrapper-inner">
+        <div class="mobile-header-logo">
+            <a class="d-flex main-logo align-items-center d-inline-flex" href="index.html">
+                <img src="assets/imgs/footer-1/logo.svg" alt="zelio" style="width: 40px; height: auto;"/>
+                <span class="fs-4 ms-2 text-dark">endless.grafix</span>
             </a>
-            <div class="container py-3 px-0">
-                <a class="navbar-brand d-flex main-logo align-items-center ms-lg-0 ms-md-5 ms-3" href="index.html">
-                    <img src="assets/imgs/template/favicon.svg" alt="zelio" />
-                    <span class="fs-4 ms-2">endless.grafix</span>
-                </a>
-                <div class="d-none d-lg-flex">
-                    <div class="main-menu">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="burger-icon burger-icon-white border rounded-3">
+                <span class="burger-icon-top"></span>
+                <span class="burger-icon-mid"></span>
+                <span class="burger-icon-bottom"></span>
+            </div>
+        </div>
+        <div class="mobile-header-content-area">
+            <div class="perfect-scroll">
+                <div class="mobile-menu-wrap mobile-header-border">
+                    <nav>
+                        <ul class="mobile-menu font-heading ps-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.html">Home</a>
+                            
+                            </li>
+
                             <li class="nav-item has-children">
-                                <a class="nav-link active" href="#">Home</a>
+                                <a class="nav-link" href="services.html">Services</a>
                                 <ul class="sub-menu">
-                                    <li><a href="index.html">Landing Page</a></li>
-                                    <li><a href="index-1.html">Home 1 - Designer</a></li>
-                                    <li><a href="index-2.html">Home 2 - Developer</a></li>
-                                    <li><a href="index-3.html">Home 3 - Author</a></li>
+                                    <li><a href="services.html">UI/UX Design</a></li>               
+                                    <li><a href="services.html"> Logo Design</a></li>
+                                    <li><a href="services.html">Web Development</a></li>    
+                                    <li><a href="services.html">Brand Identity Design</a></li>
+                                    <li><a href="services.html">Photo Restoration</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                            <li class="nav-item"><a class="nav-link" href="work.html">Portfolio</a></li>
-                            <li class="nav-item has-children">
-                                <a class="nav-link" href="#">Pages</a>
-                                <ul class="sub-menu">
-                                    <li><a href="pricing.html">Pricing</a></li>
-                                    <li><a href="coming-soon.html">Coming Soon</a></li>
-                                    <li><a href="404.html">404</a></li>
-                                </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href="work.html">Portfolio</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="blog-list.html">Blog</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="pricing.html">Pricing</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="blog-list.html">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#contact">Contact</a>
+                            </li>
                         </ul>
-                    </div>
-                </div>
-                <div class="navbar-social d-flex align-items-center">
-                    <div class="d-md-flex d-none gap-3">
-                        <a href="http://facebook.com"><i class="ri-facebook-circle-fill fs-18"></i></a>
-                        <a href="http://twitter.com"><i class="ri-twitter-x-fill fs-18"></i></a>
-                        <a href="http://linkedin.com"><i class="ri-linkedin-fill fs-18"></i></a>
-                        <a href="http://github.com"><i class="ri-github-fill fs-18"></i></a>
-                    </div>
-                    <div class="burger-icon burger-icon-white border rounded-3">
-                        <span class="burger-icon-top"></span>
-                        <span class="burger-icon-mid"></span>
-                        <span class="burger-icon-bottom"></span>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <!-- Navbar End -->
-
-    <main>
-        <!-- Work Section -->
-        <section class="section-work pt-120 pb-150">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-lg-auto text-center">
-                        <div class="btn btn-gradient d-inline-block text-uppercase">Recent Work</div>
-                        <h3 class="ds-3 mt-3 mb-4 text-dark">
-                            Explore <span class="text-300">My Latest Work</span> and Discover the Craftsmanship Behind <span class="text-300">Each Design</span>
-                        </h3>
-                        <p class="text-300 fs-5">
-                            Explore my latest work and discover the craftsmanship behind each design: <br />
-                            a detailed look into how I bring innovation and creativity to life.
-                        </p>
-                    </div>
-                </div>
-                <div class="row" id="portfolioList">
-                    <!-- Dynamic portfolio cards will be loaded here -->
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="section-footer position-relative pt-60 pb-60 bg-secondary-1">
-            <div class="container">
-                <div class="text-center">
-                    <a class="d-flex main-logo align-items-center d-inline-flex" href="index.html">
-                        <img src="assets/imgs/footer-1/logo.svg" alt="zelio" />
-                        <span class="fs-4 ms-2 text-white-keep">william.design</span>
-                    </a>
-                    <div class="navigation my-4">
-                        <a href="index.html" class="fs-5">Home</a>
-                        <a href="services.html" class="fs-5">Services</a>
-                        <a href="work.html" class="fs-5">Portfolio</a>
-                        <a href="pricing.html" class="fs-5">Pricing</a>
-                        <a href="blog-list.html" class="fs-5">Blog</a>
-                        <a href="#contact" class="fs-5">Contact</a>
-                    </div>
+                    </nav>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+</div>
 
-    <!-- Firebase & JS Libraries -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
-    <script src="assets/js/vendors/jquery-3.7.1.min.js"></script>
-    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
-</body>
-</html>
+</header>
+
+        <main>
+            <!-- prettier-ignore -->
+            <!--work -->
+<section class="section-work pt-120 pb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-lg-auto">
+                <div class="text-center">
+                    <div class="btn btn-gradient d-inline-block text-uppercase">recent Work</div>
+                    <h3 class="ds-3 mt-3 mb-4 text-dark">Explore <span class="text-300">My Latest Work and Discover the</span> Craftsmanship Behind <span class="text-300">Each Design</span></h3>
+                    <p class="text-300 fs-5">
+                        Explore my latest work and discover the craftsmanship behind each design: <br />
+                        a detailed look into how I bring innovation and creativity to life
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="card-scroll mt-8">
+                <div class="cards">
+                    <!-- prettier-ignore -->
+                    <div class="card-custom" data-index="0">
+    <div class="card__inner bg-6 p-lg-6 p-md-4 p-3">
+        <div class="card__image-container zoom-img position-relative">
+            <img class="card__image" src="assets/imgs/work/img-1.png" alt="zelio" />
+            <a href="work-single.html" class="card-image-overlay position-absolute start-0 end-0 w-100 h-100"></a>
+        </div>
+        <div class="card__content px-md-4 px-3">
+            <div class="card__title d-md-flex align-items-center mb-0 mb-lg-2">
+                <a href="work-single.html" class="card_title_link">
+                    <p class="text-primary mb-0 mb-md-2">UI/UX</p>
+                    <h3 class="fw-semibold">E-commerce Website Redesign</h3>
+                </a>
+                <a href="work-single.html" class="card-icon d-none d-md-inline-flex border text-dark border-dark icon-shape ms-auto icon-md rounded-circle">
+                    <i class="ri-arrow-right-up-line"></i>
+                </a>
+            </div>
+            <p class="text-300 mb-lg-auto mb-md-4 mb-3">Designed an interactive and engaging educational platform aimed at improving online learning experiences. This included developing intuitive navigation, interactive course materials, and features that support student engagement and participation, making learning more accessible and enjoyable.</p>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Client</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">Conceptual JSC</p>
+            </div>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Completion Time</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">6 months</p>
+            </div>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Tools</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">Figma, Sketch, Photoshop, Framer</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-custom" data-index="0">
+    <div class="card__inner bg-6 p-lg-6 p-md-4 p-3">
+        <div class="card__image-container zoom-img position-relative">
+            <img class="card__image" src="assets/imgs/work/img-2.png" alt="zelio" />
+            <a href="work-single.html" class="card-image-overlay position-absolute start-0 end-0 w-100 h-100"></a>
+        </div>
+        <div class="card__content px-md-4 px-3">
+            <div class="card__title d-md-flex align-items-center mb-0 mb-lg-2">
+                <a href="work-single.html" class="card_title_link">
+                    <p class="text-primary mb-0 mb-md-2">APP DESIGN</p>
+                    <h3 class="fw-semibold">Fitness App UI/UX</h3>
+                </a>
+                <a href="work-single.html" class="card-icon d-none d-md-inline-flex border text-dark border-dark icon-shape ms-auto icon-md rounded-circle">
+                    <i class="ri-arrow-right-up-line"></i>
+                </a>
+            </div>
+            <p class="text-300 mb-lg-auto mb-md-4 mb-3">Designed an interactive and engaging educational platform aimed at improving online learning experiences. This included developing intuitive navigation, interactive course materials, and features that support student engagement and participation, making learning more accessible and enjoyable.</p>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Client</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">Conceptual JSC</p>
+            </div>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Completion Time</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">6 months</p>
+            </div>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Tools</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">Figma, Sketch, Photoshop, Framer</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-custom" data-index="0">
+    <div class="card__inner bg-6 p-lg-6 p-md-4 p-3">
+        <div class="card__image-container zoom-img position-relative">
+            <img class="card__image" src="assets/imgs/work/img-3.png" alt="zelio" />
+            <a href="work-single.html" class="card-image-overlay position-absolute start-0 end-0 w-100 h-100"></a>
+        </div>
+        <div class="card__content px-md-4 px-3">
+            <div class="card__title d-md-flex align-items-center mb-0 mb-lg-2">
+                <a href="work-single.html" class="card_title_link">
+                    <p class="text-primary mb-0 mb-md-2">WEB DEVELOPMENT</p>
+                    <h3 class="fw-semibold">Travel Booking Platform</h3>
+                </a>
+                <a href="work-single.html" class="card-icon d-none d-md-inline-flex border text-dark border-dark icon-shape ms-auto icon-md rounded-circle">
+                    <i class="ri-arrow-right-up-line"></i>
+                </a>
+            </div>
+            <p class="text-300 mb-lg-auto mb-md-4 mb-3">Designed an interactive and engaging educational platform aimed at improving online learning experiences. This included developing intuitive navigation, interactive course materials, and features that support student engagement and participation, making learning more accessible and enjoyable.</p>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Client</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">Conceptual JSC</p>
+            </div>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Completion Time</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">6 months</p>
+            </div>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Tools</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">Figma, Sketch, Photoshop, Framer</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-custom" data-index="0">
+    <div class="card__inner bg-6 p-lg-6 p-md-4 p-3">
+        <div class="card__image-container zoom-img position-relative">
+            <img class="card__image" src="assets/imgs/work/img-4.png" alt="zelio" />
+            <a href="work-single.html" class="card-image-overlay position-absolute start-0 end-0 w-100 h-100"></a>
+        </div>
+        <div class="card__content px-md-4 px-3">
+            <div class="card__title d-md-flex align-items-center mb-0 mb-lg-2">
+                <a href="work-single.html" class="card_title_link">
+                    <p class="text-primary mb-0 mb-md-2">VISUAL DESIGN</p>
+                    <h3 class="fw-semibold">Educational Platform UI/UX</h3>
+                </a>
+                <a href="work-single.html" class="card-icon d-none d-md-inline-flex border text-dark border-dark icon-shape ms-auto icon-md rounded-circle">
+                    <i class="ri-arrow-right-up-line"></i>
+                </a>
+            </div>
+            <p class="text-300 mb-lg-auto mb-md-4 mb-3">Designed an interactive and engaging educational platform aimed at improving online learning experiences. This included developing intuitive navigation, interactive course materials, and features that support student engagement and participation, making learning more accessible and enjoyable.</p>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Client</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">Conceptual JSC</p>
+            </div>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Completion Time</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">6 months</p>
+            </div>
+            <div class="d-md-flex content">
+                <p class="mb-0 fs-7 text-dark text-uppercase w-40">Tools</p>
+                <p class="mb-0 card__description text-300 fs-6 mb-0">Figma, Sketch, Photoshop, Framer</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <!--Static 1-->
+<div class="section-static-1 position-relative overflow-hidden z-0 py-8 bg-6">
+    <div class="container">
+        <div class="inner">
+            <div class="row align-items-center justify-content-between g-1"> <!-- Added g-2 for reduced spacing -->
+                <div class="col-lg-auto col-md-6">
+                    <div class="counter-item-cover counter-item">
+                        <div class="content text-center mx-auto d-flex align-items-center">
+                            <span class="ds-3 count text-primary fw-medium my-0">+<span class="odometer ds-1 text-dark fw-semibold" data-count="06"></span></span>
+                            <div class="text-start ms-2">
+                                <p class="fs-5 mb-0 text-300">Year of</p>
+                                <p class="fs-5 mb-0 fw-bold">Experience</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-auto col
