@@ -489,7 +489,12 @@
 </div>
 </div>
 </div>
-`;
+`;  document.querySelector('.cards').innerHTML += cardHTML;
+  });
+
+  // 🔥 Re-run the scroll effect after cards are in DOM
+  cardScroll();
+});
   portfolioList.innerHTML += html;
                     });
                 })
