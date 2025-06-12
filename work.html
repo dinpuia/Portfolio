@@ -432,8 +432,7 @@
                     snapshot.forEach((doc) => {
                         const data = doc.data();
                         const html = `
-                       <div class="card-custom">
-        <div class="card__inner">  <div class="card-custom mb-5" data-index="0">
+                         <div class="card-custom mb-5" data-index="0">
   <article class="card__inner bg-6 p-lg-6 p-md-4 p-3">
     <figure class="card__image-container zoom-img position-relative">
       <img 
@@ -481,11 +480,10 @@
       <div class="d-md-flex content">
         <p class="mb-0 fs-7 text-dark text-uppercase w-40">Tools</p>
         <p class="mb-0 card__description text-300 fs-6">${data.tools}</p>
-   </div>
+        </div>
+</div>
   </article>
-</div>
-</div>
-</div>
+
 </div>
 `;
   portfolioList.innerHTML += html;
