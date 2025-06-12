@@ -424,7 +424,7 @@
   // Reference the container
   const portfolioList = document.getElementById("portfolioList");
 
-  db.collection("portfolioList")
+  db.collection("portfolio")
     .orderBy("timestamp", "desc")
     .limit(8)
     .get()
