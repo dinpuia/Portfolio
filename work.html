@@ -458,13 +458,7 @@
     // ✅ This is critical: wait until all cards are added, THEN run scroll animation setup
     cardScroll();
   });
-setTimeout(() => {
-  cardScroll();
-}, 100); // small delay helps trigger correct dimensions
-                .catch((error) => {
-                    console.error("Error fetching portfolio items:", error);
-                    portfolioList.innerHTML = `<p class="text-danger">Failed to load portfolio items.</p>`;
-                });
+            
         </script>
         
         <!-- JavaScript Libraries -->
